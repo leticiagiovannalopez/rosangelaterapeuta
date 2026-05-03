@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terapia Científica — Rosangela da Silva</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Nunito:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:      #1E3A5F;
+  --navy-lt:   #2C527F;
+  --navy-dk:   #122440;
+  --gold:      #C49A3C;
+  --gold-lt:   #D9B86A;
+  --gold-pale: #F5EDD8;
+  --linen:     #F8F4EE;
+  --warm:      #FFFFFF;
+  --text:      #1A2E45;
+  --muted:     #5C7592;
+  --border:    rgba(30,58,95,.1);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: var(--linen);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed; inset: 0; pointer-events: none; z-index: 9998;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--linen); }
+::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 64px;
+  background: rgba(248,244,238,.94);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(196,154,60,.18);
+  animation: fadeDown .8s ease both;
+  transition: padding .3s, box-shadow .3s;
+}
+nav.scrolled { padding: 13px 64px; box-shadow: 0 4px 28px rgba(30,58,95,.08); }
+
+.nav-brand { display: flex; flex-direction: column; line-height: 1.1; }
+.nav-name { font-family: 'Lora', serif; font-size: 1.05rem; font-weight: 600; color: var(--navy); }
+.nav-sub  { font-size: .62rem; font-weight: 400; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); margin-top: 2px; }
+
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a { font-size: .75rem; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color .22s; position: relative; }
+.nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1.5px; background: var(--gold); transition: width .3s ease; }
+.nav-links a:hover { color: var(--navy); }
+.nav-links a:hover::after { width: 100%; }
+
+.nav-cta { font-size: .73rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--warm); background: var(--navy); padding: 11px 26px; border-radius: 4px; text-decoration: none; transition: background .25s, transform .2s; box-shadow: 0 4px 18px rgba(30,58,95,.22); white-space: nowrap; }
+.nav-cta:hover { background: var(--navy-lt); transform: translateY(-2px); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding-top: 80px;
+}
+
+.hero-left {
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 80px 56px 80px 64px;
+  position: relative; z-index: 1;
+  animation: fadeLeft .9s .1s ease both;
+}
+
+/* Decorative arcs behind hero-left */
+.hero-left::before {
+  content: '';
+  position: absolute;
+  bottom: -10%; left: -15%;
+  width: 500px; height: 500px; border-radius: 50%;
+  border: 1px solid rgba(196,154,60,.1);
+  pointer-events: none; z-index: 0;
+}
+
+.hero-eyebrow { display: inline-flex; align-items: center; gap: 12px; font-size: .66rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); margin-bottom: 24px; position: relative; z-index: 1; }
+.eyebrow-line { width: 26px; height: 1.5px; background: var(--gold); flex-shrink: 0; }
+
+.hero-title { font-family: 'Lora', serif; font-size: clamp(2.8rem, 4.5vw, 5.5rem); font-weight: 500; line-height: 1.1; color: var(--navy); margin-bottom: 16px; position: relative; z-index: 1; }
+.hero-title em { font-style: italic; color: var(--gold); }
+
+.hero-subtitle { font-family: 'Lora', serif; font-size: clamp(1rem, 1.6vw, 1.35rem); font-style: italic; font-weight: 400; color: var(--muted); margin-bottom: 22px; line-height: 1.55; position: relative; z-index: 1; }
+
+.hero-lead { font-size: .95rem; font-weight: 300; line-height: 1.9; color: var(--muted); margin-bottom: 44px; position: relative; z-index: 1; }
+
+.btn-hero { display: inline-flex; align-items: center; gap: 8px; font-size: .8rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--warm); background: var(--gold); padding: 16px 40px; border-radius: 6px; text-decoration: none; transition: background .25s, transform .2s, box-shadow .25s; box-shadow: 0 8px 28px rgba(196,154,60,.35); position: relative; z-index: 1; }
+.btn-hero:hover { background: var(--gold-lt); transform: translateY(-2px); box-shadow: 0 14px 36px rgba(196,154,60,.4); }
+
+.hero-trust { margin-top: 60px; display: flex; gap: 0; align-items: flex-start; padding-top: 32px; border-top: 1px solid var(--border); position: relative; z-index: 1; }
+
+.trust-item { flex: 1; padding-right: 24px; }
+.trust-item + .trust-item { padding-left: 24px; padding-right: 0; border-left: 1px solid var(--border); }
+
+.trust-num { font-family: 'Lora', serif; font-size: 2rem; font-weight: 600; color: var(--navy); line-height: 1; }
+.trust-label { font-size: .72rem; font-weight: 400; color: var(--muted); margin-top: 8px; line-height: 1.6; }
+
+/* ── HERO RIGHT — decorative panel ── */
+.hero-right {
+  background: var(--navy);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 80px 60px;
+  position: relative; overflow: hidden;
+  animation: fadeRight .9s .15s ease both;
+}
+
+/* background glow */
+.hero-right::before {
+  content: '';
+  position: absolute; top: -30%; right: -20%;
+  width: 500px; height: 500px; border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(196,154,60,.18) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.hero-right::after {
+  content: '';
+  position: absolute; bottom: -20%; left: -15%;
+  width: 360px; height: 360px; border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(255,255,255,.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* decorative ring */
+.hero-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(196,154,60,.15);
+}
+.hero-ring-1 { width: 340px; height: 340px; }
+.hero-ring-2 { width: 240px; height: 240px; border-style: dashed; opacity: .5; animation: spin 40s linear infinite; }
+
+.hero-verse {
+  position: relative; z-index: 1;
+  text-align: center; max-width: 360px;
+}
+
+.verse-mark {
+  font-family: 'Lora', serif;
+  font-size: 6rem; font-weight: 600;
+  color: var(--gold); opacity: .25;
+  line-height: .7; margin-bottom: 8px;
+  display: block;
+}
+
+.verse-text {
+  font-family: 'Lora', serif;
+  font-size: clamp(1.1rem, 1.6vw, 1.45rem);
+  font-style: italic; font-weight: 400;
+  color: rgba(255,255,255,.88);
+  line-height: 1.75; margin-bottom: 28px;
+}
+
+.verse-ref {
+  font-size: .72rem; font-weight: 600;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: var(--gold); display: block;
+}
+
+.verse-line {
+  width: 40px; height: 1.5px; background: var(--gold);
+  margin: 20px auto; opacity: .5;
+}
+
+.hero-tags {
+  display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;
+  margin-top: 36px; position: relative; z-index: 1;
+}
+
+.hero-tag {
+  font-size: .7rem; font-weight: 500; letter-spacing: .08em;
+  color: rgba(255,255,255,.65);
+  border: 1px solid rgba(196,154,60,.25);
+  padding: 7px 16px; border-radius: 30px;
+  transition: border-color .2s, color .2s;
+}
+.hero-tag:hover { border-color: var(--gold); color: var(--gold-lt); }
+
+/* ── MARQUEE ── */
+.marquee-bar { background: var(--gold); padding: 14px 0; overflow: hidden; display: flex; }
+.marquee-track { display: flex; gap: 56px; animation: marquee 28s linear infinite; white-space: nowrap; }
+.marquee-item { font-family: 'Lora', serif; font-size: .9rem; font-style: italic; font-weight: 400; color: rgba(255,255,255,.85); display: flex; align-items: center; gap: 56px; flex-shrink: 0; }
+.m-dot { font-style: normal; font-size: .7rem; color: rgba(255,255,255,.55); }
+
+/* ── SECTION BASE ── */
+section { padding: 100px 64px; }
+
+.s-eyebrow { font-size: .66rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; display: flex; align-items: center; gap: 12px; }
+.s-eyebrow::before { content: ''; display: block; width: 22px; height: 1.5px; background: var(--gold); flex-shrink: 0; }
+
+.s-title { font-family: 'Lora', serif; font-size: clamp(1.8rem, 2.8vw, 3rem); font-weight: 500; line-height: 1.2; color: var(--navy); }
+.s-title em { font-style: italic; color: var(--gold); }
+
+/* ── SOBRE ── */
+.sobre { background: var(--warm); }
+
+.sobre-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 80px; align-items: start;
+}
+
+/* Left accent column */
+.sobre-accent {
+  display: flex; flex-direction: column; gap: 24px;
+  padding-top: 8px;
+}
+
+.sobre-quote-card {
+  background: var(--navy);
+  border-radius: 20px; padding: 40px 36px;
+  position: relative; overflow: hidden;
+}
+
+.sobre-quote-card::before {
+  content: '';
+  position: absolute; top: -20%; right: -15%;
+  width: 200px; height: 200px; border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(196,154,60,.2) 0%, transparent 70%);
+}
+
+.sqc-label { font-size: .64rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--gold-lt); margin-bottom: 16px; }
+
+.sqc-text {
+  font-family: 'Lora', serif; font-size: 1.05rem; font-style: italic; font-weight: 400;
+  color: rgba(255,255,255,.88); line-height: 1.75; position: relative; z-index: 1;
+}
+
+.sobre-stat-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+}
+
+.sobre-stat {
+  background: var(--linen); border-radius: 14px; padding: 24px 20px;
+  border: 1px solid var(--border); text-align: center;
+  transition: border-color .2s, transform .2s;
+}
+
+.sobre-stat:hover { border-color: rgba(196,154,60,.3); transform: translateY(-3px); }
+
+.ss-num { font-family: 'Lora', serif; font-size: 2rem; font-weight: 600; color: var(--navy); line-height: 1; }
+.ss-label { font-size: .7rem; color: var(--muted); margin-top: 6px; line-height: 1.4; }
+
+/* Right content column */
+.sobre-content {}
+
+.sobre-intro {
+  font-family: 'Lora', serif; font-size: 1.18rem; font-style: italic; font-weight: 400;
+  color: var(--navy); line-height: 1.7; margin: 22px 0 26px;
+  padding-left: 20px; border-left: 3px solid var(--gold);
+}
+
+.sobre-body { font-size: .93rem; font-weight: 300; line-height: 1.95; color: var(--muted); margin-bottom: 36px; }
+.sobre-body p + p { margin-top: 14px; }
+
+.about-highlights { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.highlight { display: flex; align-items: center; gap: 12px; background: var(--linen); border-radius: 10px; padding: 14px 18px; border: 1px solid var(--border); font-size: .82rem; color: var(--navy); font-weight: 500; transition: border-color .2s, transform .2s; }
+.highlight::before { content: '—'; color: var(--gold); font-weight: 600; flex-shrink: 0; }
+.highlight:hover { border-color: rgba(196,154,60,.35); transform: translateY(-2px); }
+
+/* ── SERVIÇOS ── */
+.servicos { background: var(--linen); }
+.servicos-header { margin-bottom: 56px; }
+.servicos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+.servico-card { background: var(--warm); border-radius: 18px; padding: 44px 40px; border: 1px solid var(--border); position: relative; overflow: hidden; transition: transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s, border-color .3s; cursor: default; }
+.servico-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 0; background: var(--gold); transition: height .4s cubic-bezier(.16,1,.3,1); }
+.servico-card:hover { transform: translateY(-6px); box-shadow: 0 20px 52px rgba(30,58,95,.1); border-color: rgba(196,154,60,.2); }
+.servico-card:hover::before { height: 100%; }
+
+.servico-code { font-size: .66rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; display: inline-block; background: rgba(196,154,60,.1); padding: 5px 12px; border-radius: 20px; }
+.servico-name { font-family: 'Lora', serif; font-size: 1.3rem; font-weight: 500; color: var(--navy); margin-bottom: 14px; }
+.servico-desc { font-size: .86rem; font-weight: 300; line-height: 1.8; color: var(--muted); }
+
+/* ── PLANOS ── */
+.planos { background: var(--navy); color: var(--warm); position: relative; overflow: hidden; }
+.planos::before { content: ''; position: absolute; top: -20%; right: -10%; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(ellipse, rgba(196,154,60,.12) 0%, transparent 70%); pointer-events: none; }
+.planos::after  { content: ''; position: absolute; bottom: -15%; left: -8%; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(ellipse, rgba(255,255,255,.04) 0%, transparent 70%); pointer-events: none; }
+.planos .s-title { color: var(--warm); }
+.planos .s-eyebrow { color: var(--gold-lt); }
+.planos .s-eyebrow::before { background: var(--gold-lt); }
+.planos-header { margin-bottom: 56px; }
+.planos-sub { font-size: .93rem; font-weight: 300; color: rgba(255,255,255,.55); margin-top: 16px; max-width: 500px; line-height: 1.75; }
+
+.planos-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; position: relative; z-index: 1; }
+
+.plano-card { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); border-radius: 18px; padding: 36px 28px; position: relative; transition: background .3s, border-color .3s, transform .3s; display: flex; flex-direction: column; }
+.plano-card.destaque { background: var(--gold); border-color: var(--gold); transform: scale(1.04); box-shadow: 0 20px 56px rgba(196,154,60,.4); }
+.plano-card:not(.destaque):hover { background: rgba(255,255,255,.09); border-color: rgba(196,154,60,.35); transform: translateY(-4px); }
+
+.plano-badge { position: absolute; top: -13px; left: 50%; transform: translateX(-50%); background: var(--navy-dk); color: var(--gold); font-size: .6rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; padding: 5px 14px; border-radius: 20px; white-space: nowrap; }
+.plano-name { font-family: 'Lora', serif; font-size: 1.05rem; font-weight: 500; color: var(--warm); margin-bottom: 18px; }
+.plano-card.destaque .plano-name { color: var(--navy); }
+.plano-price { font-family: 'Lora', serif; font-size: 2.2rem; font-weight: 600; color: var(--gold-lt); line-height: 1; margin-bottom: 4px; }
+.plano-card.destaque .plano-price { color: var(--navy); }
+.plano-per { font-size: .7rem; color: rgba(255,255,255,.45); margin-bottom: 24px; }
+.plano-card.destaque .plano-per { color: rgba(30,58,95,.6); }
+.plano-divider { height: 1px; background: rgba(255,255,255,.1); margin-bottom: 20px; }
+.plano-card.destaque .plano-divider { background: rgba(30,58,95,.15); }
+.plano-items { list-style: none; display: flex; flex-direction: column; gap: 11px; flex: 1; }
+.plano-item { display: flex; align-items: flex-start; gap: 9px; font-size: .8rem; font-weight: 300; color: rgba(255,255,255,.7); line-height: 1.5; }
+.plano-card.destaque .plano-item { color: rgba(30,58,95,.8); }
+.pi-check { color: var(--gold-lt); font-size: .95rem; flex-shrink: 0; margin-top: 1px; }
+.plano-card.destaque .pi-check { color: var(--navy); }
+.plano-cta { display: block; text-align: center; text-decoration: none; margin-top: 24px; font-size: .75rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--warm); background: rgba(255,255,255,.1); padding: 13px; border-radius: 8px; border: 1px solid rgba(255,255,255,.15); transition: background .25s, color .25s; }
+.plano-card.destaque .plano-cta { background: var(--navy); color: var(--warm); border-color: transparent; }
+.plano-cta:hover { background: var(--gold); color: var(--warm); border-color: transparent; }
+.plano-card.destaque .plano-cta:hover { background: var(--navy-lt); }
+
+/* ── MISSÃO ── */
+.missao {
+  background: var(--gold-pale);
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; align-items: center;
+}
+
+.missao-deco {
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+
+.missao-deco-inner {
+  width: 280px; height: 280px; border-radius: 50%;
+  border: 1px solid rgba(196,154,60,.3);
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+
+.missao-deco-inner::before {
+  content: '';
+  position: absolute; inset: 20px; border-radius: 50%;
+  border: 1px dashed rgba(196,154,60,.2);
+}
+
+.missao-deco-text {
+  text-align: center; padding: 0 32px;
+}
+
+.mdt-big {
+  font-family: 'Lora', serif;
+  font-size: 4.5rem; font-weight: 600;
+  color: var(--gold); opacity: .3; line-height: 1; display: block;
+}
+
+.mdt-label {
+  font-family: 'Lora', serif;
+  font-size: 1rem; font-style: italic; font-weight: 400;
+  color: var(--navy); line-height: 1.6; margin-top: 8px;
+  opacity: .6;
+}
+
+.missao-content {}
+.missao-body { font-size: .93rem; font-weight: 300; line-height: 1.95; color: var(--muted); margin: 22px 0 36px; }
+.missao-values { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.mval { display: flex; align-items: flex-start; gap: 12px; padding: 16px 20px; background: var(--warm); border-radius: 12px; border-left: 3px solid var(--gold); font-size: .85rem; font-weight: 500; color: var(--navy); box-shadow: 0 2px 12px rgba(30,58,95,.06); line-height: 1.5; transition: transform .2s; }
+.mval::before { content: '✦'; color: var(--gold); font-size: .65rem; flex-shrink: 0; margin-top: 3px; }
+.mval:hover { transform: translateX(4px); }
+
+/* ── DEPOIMENTOS ── */
+.depoimentos { background: var(--warm); }
+.depoi-intro { max-width: 520px; margin-bottom: 56px; }
+.depoi-sub { font-size: .9rem; font-weight: 300; line-height: 1.8; color: var(--muted); margin-top: 16px; }
+
+.carousel-wrap { overflow: hidden; }
+.carousel-track { display: flex; gap: 22px; animation: carousel 40s linear infinite; width: max-content; }
+.carousel-track:hover { animation-play-state: paused; }
+
+.depoi-card { background: var(--linen); border-radius: 18px; padding: 34px 30px; width: 310px; flex-shrink: 0; border: 1px solid var(--border); transition: transform .3s, box-shadow .3s; }
+.depoi-card:hover { transform: translateY(-4px); box-shadow: 0 14px 40px rgba(30,58,95,.08); }
+.depoi-stars { display: flex; gap: 3px; margin-bottom: 18px; }
+.dstar { color: var(--gold); font-size: .82rem; }
+.depoi-text { font-family: 'Lora', serif; font-style: italic; font-weight: 400; font-size: .97rem; line-height: 1.75; color: var(--text); margin-bottom: 22px; }
+.depoi-text::before { content: '\201C'; color: var(--gold); font-size: 1.4rem; line-height: 0; vertical-align: -0.3em; margin-right: 2px; }
+.depoi-text::after  { content: '\201D'; color: var(--gold); font-size: 1.4rem; line-height: 0; vertical-align: -0.3em; margin-left: 2px; }
+.depoi-author { display: flex; align-items: center; gap: 12px; }
+.d-av { width: 38px; height: 38px; border-radius: 50%; background: var(--navy); display: flex; align-items: center; justify-content: center; font-family: 'Lora', serif; font-size: .95rem; font-weight: 600; color: var(--gold-lt); flex-shrink: 0; }
+.d-name { font-size: .83rem; font-weight: 600; color: var(--navy); }
+.d-sub  { font-size: .68rem; color: var(--muted); margin-top: 2px; }
+
+/* ── CONTATO ── */
+.contato { background: var(--navy); padding: 100px 64px; position: relative; overflow: hidden; }
+.contato::before { content: ''; position: absolute; top: -30%; right: -10%; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(ellipse, rgba(196,154,60,.15) 0%, transparent 70%); pointer-events: none; }
+.contato::after  { content: ''; position: absolute; bottom: -20%; left: -8%; width: 360px; height: 360px; border-radius: 50%; background: radial-gradient(ellipse, rgba(255,255,255,.04) 0%, transparent 70%); pointer-events: none; }
+
+.contato-inner { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; text-align: center; }
+.contato-inner .s-eyebrow { justify-content: center; }
+.contato-inner .s-eyebrow::before { display: none; }
+.contato-inner .s-title { color: var(--warm); }
+.contato-inner .s-eyebrow { color: var(--gold-lt); }
+.contato-lead { font-size: .95rem; font-weight: 300; line-height: 1.85; color: rgba(255,255,255,.55); margin: 18px 0 48px; }
+
+.contato-infos { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-bottom: 48px; }
+.cinfo { display: flex; align-items: flex-start; gap: 14px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 12px; padding: 16px 22px; transition: border-color .25s, background .25s; text-align: left; }
+.cinfo:hover { border-color: rgba(196,154,60,.4); background: rgba(255,255,255,.09); }
+.ci-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--gold); flex-shrink: 0; margin-top: 7px; }
+.ci-label { font-size: .62rem; letter-spacing: .12em; text-transform: uppercase; color: var(--gold-lt); }
+.ci-val   { font-size: .88rem; font-weight: 500; color: var(--warm); margin-top: 4px; }
+
+.btn-whatsapp { display: inline-flex; align-items: center; gap: 10px; justify-content: center; font-size: .8rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--warm); background: #25D366; padding: 16px 32px; border-radius: 50px; text-decoration: none; border: none; cursor: pointer; box-shadow: 0 8px 28px rgba(37,211,102,.3); transition: background .25s, transform .2s, box-shadow .25s; }
+.btn-whatsapp:hover { background: #1DB954; transform: translateY(-2px); box-shadow: 0 14px 36px rgba(37,211,102,.36); }
+
+/* ── FOOTER ── */
+footer { background: var(--navy-dk); padding: 52px 64px 28px; }
+.footer-top { display: flex; justify-content: space-between; align-items: flex-start; padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,.07); margin-bottom: 24px; }
+.f-brand-name { font-family: 'Lora', serif; font-size: 1.15rem; font-weight: 600; color: var(--warm); }
+.f-brand-sub { font-size: .65rem; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); margin-top: 4px; }
+.f-cols { display: flex; gap: 64px; }
+.f-col-h { font-size: .65rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+.f-col a { display: block; font-size: .78rem; color: rgba(255,255,255,.4); text-decoration: none; margin-bottom: 10px; transition: color .2s; }
+.f-col a:hover { color: rgba(255,255,255,.8); }
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; font-size: .7rem; color: rgba(255,255,255,.22); flex-wrap: wrap; gap: 8px; }
+
+/* scroll top */
+.scroll-top { position: fixed; bottom: 28px; right: 28px; z-index: 400; width: 44px; height: 44px; border-radius: 50%; background: var(--gold); color: var(--warm); display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 1rem; box-shadow: 0 4px 18px rgba(196,154,60,.4); opacity: 0; transform: translateY(12px); transition: opacity .3s, transform .3s; pointer-events: none; }
+.scroll-top.show { opacity: 1; transform: translateY(0); pointer-events: all; }
+.scroll-top:hover { background: var(--gold-lt); }
+
+/* mobile nav toggle */
+.nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+.nav-toggle span { display: block; width: 22px; height: 2px; background: var(--navy); border-radius: 2px; transition: transform .3s, opacity .3s; }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeDown  { from{opacity:0;transform:translateY(-16px)} to{opacity:1;transform:translateY(0)} }
+@keyframes fadeLeft  { from{opacity:0;transform:translateX(-28px)} to{opacity:1;transform:translateX(0)} }
+@keyframes fadeRight { from{opacity:0;transform:translateX(28px)}  to{opacity:1;transform:translateX(0)} }
+@keyframes marquee   { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+@keyframes carousel  { from{transform:translateX(0)} to{transform:translateX(calc(-50% - 11px))} }
+@keyframes spin      { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+
+.reveal   { opacity:0; transform:translateY(24px);   transition:opacity .8s ease, transform .8s ease; }
+.reveal-l { opacity:0; transform:translateX(-24px);  transition:opacity .8s ease, transform .8s ease; }
+.reveal-r { opacity:0; transform:translateX(24px);   transition:opacity .8s ease, transform .8s ease; }
+.reveal.visible, .reveal-l.visible, .reveal-r.visible { opacity:1; transform:none; }
+
+/* ════════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════════ */
+
+/* Tablet — 1024px */
+@media (max-width: 1024px) {
+  nav { padding: 18px 40px; }
+  nav.scrolled { padding: 12px 40px; }
+  .nav-links { gap: 22px; }
+
+  .hero { grid-template-columns: 1fr; }
+  .hero-left { padding: 100px 40px 60px; }
+  .hero-right { display: none; } /* hide deco panel on tablet — text fills width */
+
+  .sobre-grid { grid-template-columns: 1fr; gap: 48px; }
+  .sobre-accent { flex-direction: row; flex-wrap: wrap; }
+  .sobre-quote-card { flex: 1; min-width: 260px; }
+  .sobre-stat-row { flex: 0 0 auto; }
+
+  .planos-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+  .plano-card.destaque { transform: none; }
+
+  .missao { grid-template-columns: 1fr; gap: 48px; }
+  .missao-deco { display: none; }
+
+  .contato { padding: 72px 40px; }
+
+  footer { padding: 44px 40px 24px; }
+  .footer-top { flex-direction: column; gap: 36px; }
+  .f-cols { gap: 40px; flex-wrap: wrap; }
+
+  section { padding: 80px 40px; }
+}
+
+/* Mobile — 768px */
+@media (max-width: 768px) {
+  nav { padding: 16px 24px; }
+  nav.scrolled { padding: 12px 24px; }
+
+  .nav-links { display: none; flex-direction: column; gap: 0; position: absolute; top: 100%; left: 0; right: 0; background: rgba(248,244,238,.98); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(196,154,60,.18); padding: 8px 0; }
+  .nav-links.open { display: flex; }
+  .nav-links li a { display: block; padding: 14px 24px; font-size: .82rem; border-bottom: 1px solid rgba(30,58,95,.05); }
+  .nav-links a::after { display: none; }
+
+  .nav-toggle { display: flex; }
+  .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-toggle.open span:nth-child(2) { opacity: 0; }
+  .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .nav-cta { display: none; }
+
+  section { padding: 64px 24px; }
+
+  .hero-left { padding: 96px 24px 56px; }
+
+  .hero-trust { flex-direction: column; gap: 24px; }
+  .trust-item + .trust-item { padding-left: 0; border-left: none; border-top: 1px solid var(--border); padding-top: 20px; }
+  .trust-item { padding-right: 0; }
+
+  .servicos-grid { grid-template-columns: 1fr; }
+  .planos-grid   { grid-template-columns: 1fr; }
+  .missao-values { grid-template-columns: 1fr; }
+  .about-highlights { grid-template-columns: 1fr; }
+  .sobre-stat-row { grid-template-columns: 1fr 1fr; }
+
+  .f-grid-2 { grid-template-columns: 1fr; }
+
+  .contato { padding: 56px 24px; }
+
+  footer { padding: 40px 24px 20px; }
+  .f-cols { flex-direction: column; gap: 28px; }
+
+  .scroll-top { bottom: 20px; right: 20px; width: 40px; height: 40px; font-size: .9rem; }
+}
+
+/* Small mobile — 480px */
+@media (max-width: 480px) {
+  .hero-title { font-size: 2.6rem; }
+  .hero-subtitle { font-size: 1rem; }
+  .s-title { font-size: 1.7rem; }
+  .plano-card.destaque { transform: none; }
+  .depoi-card { width: 280px; }
+}
+</style>
+</head>
+<body>
+
+<a href="#" class="scroll-top" id="scrollTop">↑</a>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-brand">
+    <div class="nav-name">Rosangela da Silva</div>
+    <div class="nav-sub">Terapia Científica</div>
+  </div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#sobre"       onclick="closeNav()">Sobre</a></li>
+    <li><a href="#servicos"    onclick="closeNav()">Serviços</a></li>
+    <li><a href="#planos"      onclick="closeNav()">Planos</a></li>
+    <li><a href="#depoimentos" onclick="closeNav()">Depoimentos</a></li>
+    <li><a href="#contato"     onclick="closeNav()">Contato</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:16px">
+    <a href="https://wa.me/5511985630042" class="nav-cta" target="_blank">WhatsApp</a>
+    <div class="nav-toggle" id="navToggle" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-left">
+    <div class="hero-eyebrow">
+      <span class="eyebrow-line"></span>
+      Terapeuta Cristã
+    </div>
+
+    <h1 class="hero-title">
+      Terapia<br>
+      <em>Científica</em>
+    </h1>
+
+    <p class="hero-subtitle">Transforme sua vida com a mente de Cristo</p>
+
+    <p class="hero-lead">
+      A terapia que integra fé e bem-estar, unindo conhecimento,
+      práticas terapêuticas modernas e a ótica da Palavra para
+      uma transformação real — que começa dentro e se revela do lado de fora.
+    </p>
+
+    <a href="https://wa.me/5511985630042" class="btn-hero" target="_blank">Agende sua sessão →</a>
+
+    <div class="hero-trust">
+      <div class="trust-item">
+        <div class="trust-num">14 anos</div>
+        <div class="trust-label">caminhando ao lado de pessoas que desejam cura emocional, clareza e uma vida mais leve com Jesus</div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-num">100%</div>
+        <div class="trust-label">Online</div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-num">★ 5.0</div>
+        <div class="trust-label">Avaliação média</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Decorative right panel — hidden on tablet/mobile -->
+  <div class="hero-right">
+    <div class="hero-ring hero-ring-1"></div>
+    <div class="hero-ring hero-ring-2"></div>
+
+    <div class="hero-verse">
+      <span class="verse-mark">"</span>
+      <p class="verse-text">Não vos conformeis com este século, mas transformai-vos pela renovação da vossa mente.</p>
+      <div class="verse-line"></div>
+      <span class="verse-ref">Romanos 12:2</span>
+    </div>
+
+    <div class="hero-tags">
+      <span class="hero-tag">Cura emocional</span>
+      <span class="hero-tag">Fé &amp; ciência</span>
+      <span class="hero-tag">Mente de Cristo</span>
+      <span class="hero-tag">100% Online</span>
+      <span class="hero-tag">Transformação real</span>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-bar">
+  <div class="marquee-track">
+    <div class="marquee-item">Cura Emocional <span class="m-dot">✦</span> Fé &amp; Bem-Estar <span class="m-dot">✦</span> Clareza Mental <span class="m-dot">✦</span> Identidade em Cristo <span class="m-dot">✦</span> Respiração Consciente <span class="m-dot">✦</span> Neuroplasticidade <span class="m-dot">✦</span> Propósito <span class="m-dot">✦</span></div>
+    <div class="marquee-item">Cura Emocional <span class="m-dot">✦</span> Fé &amp; Bem-Estar <span class="m-dot">✦</span> Clareza Mental <span class="m-dot">✦</span> Identidade em Cristo <span class="m-dot">✦</span> Respiração Consciente <span class="m-dot">✦</span> Neuroplasticidade <span class="m-dot">✦</span> Propósito <span class="m-dot">✦</span></div>
+  </div>
+</div>
+
+<!-- SOBRE -->
+<section class="sobre" id="sobre">
+  <div class="sobre-grid">
+
+    <!-- Left accent column -->
+    <div class="sobre-accent reveal-l">
+      <div class="sobre-quote-card">
+        <div class="sqc-label">Missão</div>
+        <p class="sqc-text">"Um espaço seguro onde fé e ciência caminham juntos para restaurar quem você é em Cristo."</p>
+      </div>
+
+      <div class="sobre-stat-row">
+        <div class="sobre-stat">
+          <div class="ss-num">14</div>
+          <div class="ss-label">anos de experiência</div>
+        </div>
+        <div class="sobre-stat">
+          <div class="ss-num">100%</div>
+          <div class="ss-label">atendimento online</div>
+        </div>
+        <div class="sobre-stat">
+          <div class="ss-num">★5.0</div>
+          <div class="ss-label">avaliação média</div>
+        </div>
+        <div class="sobre-stat">
+          <div class="ss-num">4</div>
+          <div class="ss-label">abordagens terapêuticas</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right content -->
+    <div class="sobre-content reveal-r">
+      <div class="s-eyebrow">Sobre mim</div>
+      <h2 class="s-title">Olá! Sou a <em>Rosangela</em> da Silva</h2>
+
+      <p class="sobre-intro">
+        Terapeuta cristã, e há 14 anos caminho lado a lado com pessoas que desejam cura emocional, clareza e uma vida mais leve com Jesus.
+      </p>
+
+      <div class="sobre-body">
+        <p>Nas minhas sessões, nós não ficamos só falando de problemas — nós conversamos de verdade. Dou risada junto, acolho, oro, escuto profundamente e ensino você a enxergar a vida pela ótica da mente de Cristo.</p>
+        <p>Meu trabalho une fé, conhecimento e práticas terapêuticas modernas. Nada de "conversas vazias": tudo é intencional, é profundo e, ao mesmo tempo, simples. Para que você compreenda cada passo.</p>
+        <p>Cada sessão é um espaço seguro onde você pode respirar, desabafar, aprender e crescer. Você será escutada, validada, compreendida e direcionada. E eu caminho com você — com carinho, firmeza e bom humor — rumo a uma transformação que começa dentro e se revela do lado de fora.</p>
+      </div>
+
+      <div class="about-highlights">
+        <div class="highlight">Cura emocional</div>
+        <div class="highlight">Embasamento científico</div>
+        <div class="highlight">Integração com a fé</div>
+        <div class="highlight">Escuta profunda</div>
+        <div class="highlight">Respiração consciente</div>
+        <div class="highlight">Propósito e identidade</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SERVIÇOS -->
+<section class="servicos reveal" id="servicos">
+  <div class="servicos-header">
+    <div class="s-eyebrow">O que ofereço</div>
+    <h2 class="s-title">Serviços &amp; <em>Abordagens</em></h2>
+  </div>
+  <div class="servicos-grid">
+    <div class="servico-card">
+      <div class="servico-code">TCE</div>
+      <div class="servico-name">Terapia Científica Emocional</div>
+      <p class="servico-desc">Uma abordagem profunda de cura emocional com fé e intencionalidade. Ideal para quem deseja tratar dores internas com clareza e transformação real, com embasamento científico.</p>
+    </div>
+    <div class="servico-card">
+      <div class="servico-code">APC</div>
+      <div class="servico-name">Ativação da Personalidade Cristã</div>
+      <p class="servico-desc">Mentoria terapêutica focada em restaurar identidade, alinhar propósito e despertar sua verdadeira personalidade em Cristo, à luz da Palavra.</p>
+    </div>
+    <div class="servico-card">
+      <div class="servico-code">DPI</div>
+      <div class="servico-name">Desenvolvimento da Personalidade Individual</div>
+      <p class="servico-desc">Práticas de respiração e atenção plena que promovem a neuroplasticidade, ajudando a reduzir a ansiedade, organizar os pensamentos e restaurar a paz interior.</p>
+    </div>
+    <div class="servico-card">
+      <div class="servico-code">GAJ</div>
+      <div class="servico-name">Gestão da Atenção com Jesus</div>
+      <p class="servico-desc">Respiração e atenção plena cristã — prática guiada que promove sincronização neural para a desativação do piloto automático, alinhando corpo, mente e espírito com a presença de Jesus.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PLANOS -->
+<section class="planos reveal" id="planos">
+  <div class="planos-header">
+    <div class="s-eyebrow">Valores &amp; Planos</div>
+    <h2 class="s-title">Escolha o plano <em>ideal</em> para você</h2>
+    <p class="planos-sub">Você pode escolher o serviço que melhor combina com o seu momento. Estou aqui para te acompanhar em cada etapa do processo. 💙</p>
+  </div>
+  <div class="planos-grid">
+    <div class="plano-card">
+      <div class="plano-name">Sessão Avulsa</div>
+      <div class="plano-price">R$180</div>
+      <div class="plano-per">por sessão</div>
+      <div class="plano-divider"></div>
+      <ul class="plano-items">
+        <li class="plano-item"><span class="pi-check">✓</span>1 hora de sessão</li>
+        <li class="plano-item"><span class="pi-check">✓</span>PDF + vídeo para 1 semana de acompanhamento de respiração controlada</li>
+      </ul>
+      <a href="https://wa.me/5511985630042" class="plano-cta" target="_blank">Agendar</a>
+    </div>
+    <div class="plano-card">
+      <div class="plano-name">Plano Simples</div>
+      <div class="plano-price">R$170</div>
+      <div class="plano-per">por sessão</div>
+      <div class="plano-divider"></div>
+      <ul class="plano-items">
+        <li class="plano-item"><span class="pi-check">✓</span>2 horas de sessão por mês (1h a cada 15 dias)</li>
+        <li class="plano-item"><span class="pi-check">✓</span>PDF + vídeos para 10 dias de acompanhamento de respiração controlada</li>
+      </ul>
+      <a href="https://wa.me/5511985630042" class="plano-cta" target="_blank">Agendar</a>
+    </div>
+    <div class="plano-card destaque">
+      <div class="plano-badge">✦ Mais Popular</div>
+      <div class="plano-name">Plano Mensal</div>
+      <div class="plano-price">R$600</div>
+      <div class="plano-per">por mês</div>
+      <div class="plano-divider"></div>
+      <ul class="plano-items">
+        <li class="plano-item"><span class="pi-check">✓</span>4 horas de sessão (1h por semana)</li>
+        <li class="plano-item"><span class="pi-check">✓</span>PDF + vídeos para 21 dias de acompanhamento de respiração controlada</li>
+      </ul>
+      <a href="https://wa.me/5511985630042" class="plano-cta" target="_blank">Agendar</a>
+    </div>
+    <div class="plano-card">
+      <div class="plano-name">Plano Trimestral</div>
+      <div class="plano-price">R$1.560</div>
+      <div class="plano-per">por trimestre · R$130/sessão</div>
+      <div class="plano-divider"></div>
+      <ul class="plano-items">
+        <li class="plano-item"><span class="pi-check">✓</span>12 horas de sessão (1h por semana, 3 meses)</li>
+        <li class="plano-item"><span class="pi-check">✓</span>PDF + vídeos para 12 semanas de acompanhamento de respiração controlada</li>
+        <li class="plano-item"><span class="pi-check">✓</span>Melhor custo-benefício</li>
+      </ul>
+      <a href="https://wa.me/5511985630042" class="plano-cta" target="_blank">Agendar</a>
+    </div>
+  </div>
+</section>
+
+<!-- MISSÃO -->
+<section class="missao" id="missao">
+  <div class="missao-deco reveal-l">
+    <div class="missao-deco-inner">
+      <div class="missao-deco-text">
+        <span class="mdt-big">✝</span>
+        <p class="mdt-label">Fé que<br>transforma</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="missao-content reveal-r">
+    <div class="s-eyebrow">Nossa Missão</div>
+    <h2 class="s-title">Uma jornada de cura <em>de dentro para fora</em></h2>
+
+    <p class="missao-body">
+      A missão da Terapia Cristã é restaurar a clareza emocional, fortalecer a identidade e conduzir cada pessoa a uma vida equilibrada e consciente diante de Deus. É ajudar você a compreender o que sente, dar nome ao que vive, organizar o que está confuso e encontrar paz onde antes havia ansiedade e insegurança. Aqui, o cuidado emocional se une à fé para que você reencontre direção, propósito e estabilidade interior, construindo uma jornada de cura que transforma de dentro para fora e permite que você volte a caminhar com leveza, segurança e esperança.
+    </p>
+
+    <div class="missao-values">
+      <div class="mval">Paz onde havia ansiedade e insegurança</div>
+      <div class="mval">Direção, propósito e estabilidade interior</div>
+      <div class="mval">Clareza emocional e identidade fortalecida</div>
+      <div class="mval">Cuidado emocional unido à fé</div>
+    </div>
+  </div>
+</section>
+
+<!-- DEPOIMENTOS -->
+<section class="depoimentos reveal" id="depoimentos">
+  <div class="depoi-intro">
+    <div class="s-eyebrow">Depoimentos</div>
+    <h2 class="s-title">O que dizem sobre <em>a terapia?</em></h2>
+    <p class="depoi-sub">Histórias reais de pessoas que encontraram clareza, paz e transformação através do processo terapêutico.</p>
+  </div>
+  <div class="carousel-wrap">
+    <div class="carousel-track">
+      <div class="depoi-card"><div class="depoi-stars"><span class="dstar">★</span><span class="dstar">★</span><span class="dstar">★</span><span class="dstar">★</span><span class="dstar">★</span></div><p class="depoi-text">A terapia com a Rosangela foi um divisor de águas na minha vida. Encontrei clareza e paz.</p><div class="depoi-author"><div class="d-av">A</div><div><div class="d-name">Ana P.</div><div class="d-sub">Terapia Emocional</div></div></div></div>
+      <div class="depoi-card"><div class="depoi-stars"><span class="dstar">★</span><span class="dstar">★</span><span class="dstar">★</span><span class="dstar">★</span><span class="dstar">★</span></div><p class="depoi-text">Nunca pensei que poderia alinhar minha fé com o cuidado emocional de forma tão profunda. Recomendo de olhos fechados.</p><div class="depoi-author"><div class="d-av">J</div><div><div class="d-name">João S.</div><div class="d-sub">Plano Mensal</div></div></div></div>
+      <div class="depoi-card"><div class="depoi-stars"><span class="dstar">★</span><span class="dstar">★</span><span class="dstar">★</span><span class="dstar">★</span><span class="dstar">★</span></div><p class="depoi-text">Um espaço seguro para crescer, chorar e rir. A Rosangela tem um dom único de acolhimento e direção.</p><div class="depoi-author"><div class="d-av">M</div><div><div class="d-name">Maria C.</div><div class="d-sub">Ativação Cristã</div></div></div></div>
+      <div class="depoi-card"><div class="depoi-stars"><span class="dstar">★</span><span class="dstar">★</span><span class="dstar">★</span><span class="dstar">★</span><span class="dstar">★</span></div><p class="depoi-text">Minha ansiedade diminuiu drasticamente. As ferramentas que aprendi nas sessões são para a vida toda.</p><div class="depoi-author"><div class="d-av">C</div><div><div class="d-name">Carlos M.</div><div class="d-sub">Gestão da Atenção</div></div></div></div>
+      <div class="depoi-card"><div class="depoi-stars"><span class="dstar">★</span><span class="dstar">★</span><span class="dstar">★</span><span class="dstar">★</span><span class="dstar">★</span></div><p class="depoi-text">Finalmente entendi o que é viver com a mente de Cristo. Uma jornada transformadora e libertadora.</p><div class="depoi-author"><div class="d-av">F</div><div><div class="d-name">Fernanda L.</div><div class="d-sub">Plano Trimestral</div></div></div></div>
+      <!-- loop -->
+      <div class="depoi-card"><div class="depoi-stars"><span class="dstar">★</span><span class="dstar">★</span><span class="dstar">★</span><span class="dstar">★</span><span class="dstar">★</span></div><p class="depoi-text">A terapia com a Rosangela foi um divisor de águas na minha vida. Encontrei clareza e paz.</p><div class="depoi-author"><div class="d-av">A</div><div><div class="d-name">Ana P.</div><div class="d-sub">Terapia Emocional</div></div></div></div>
+      <div class="depoi-card"><div class="depoi-stars"><span class="dstar">★</span><span class="dstar">★</span><span class="dstar">★</span><span class="dstar">★</span><span class="dstar">★</span></div><p class="depoi-text">Nunca pensei que poderia alinhar minha fé com o cuidado emocional de forma tão profunda. Recomendo de olhos fechados.</p><div class="depoi-author"><div class="d-av">J</div><div><div class="d-name">João S.</div><div class="d-sub">Plano Mensal</div></div></div></div>
+      <div class="depoi-card"><div class="depoi-stars"><span class="dstar">★</span><span class="dstar">★</span><span class="dstar">★</span><span class="dstar">★</span><span class="dstar">★</span></div><p class="depoi-text">Um espaço seguro para crescer, chorar e rir. A Rosangela tem um dom único de acolhimento e direção.</p><div class="depoi-author"><div class="d-av">M</div><div><div class="d-name">Maria C.</div><div class="d-sub">Ativação Cristã</div></div></div></div>
+      <div class="depoi-card"><div class="depoi-stars"><span class="dstar">★</span><span class="dstar">★</span><span class="dstar">★</span><span class="dstar">★</span><span class="dstar">★</span></div><p class="depoi-text">Minha ansiedade diminuiu drasticamente. As ferramentas que aprendi nas sessões são para a vida toda.</p><div class="depoi-author"><div class="d-av">C</div><div><div class="d-name">Carlos M.</div><div class="d-sub">Gestão da Atenção</div></div></div></div>
+      <div class="depoi-card"><div class="depoi-stars"><span class="dstar">★</span><span class="dstar">★</span><span class="dstar">★</span><span class="dstar">★</span><span class="dstar">★</span></div><p class="depoi-text">Finalmente entendi o que é viver com a mente de Cristo. Uma jornada transformadora e libertadora.</p><div class="depoi-author"><div class="d-av">F</div><div><div class="d-name">Fernanda L.</div><div class="d-sub">Plano Trimestral</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTATO -->
+<section class="contato reveal" id="contato">
+  <div class="contato-inner">
+    <div class="s-eyebrow">Entre em Contato</div>
+    <h2 class="s-title">Vamos <em>conversar?</em></h2>
+    <p class="contato-lead">
+      O primeiro passo pode parecer difícil, mas estou aqui para te acolher com carinho, firmeza e bom humor. Clique no botão abaixo e vamos marcar sua sessão. 💙
+    </p>
+
+    <div class="contato-infos">
+      <div class="cinfo"><div class="ci-dot"></div><div><div class="ci-label">WhatsApp</div><div class="ci-val">(11) 98563-0042</div></div></div>
+      <div class="cinfo"><div class="ci-dot"></div><div><div class="ci-label">Formato</div><div class="ci-val">100% Online</div></div></div>
+      <div class="cinfo"><div class="ci-dot"></div><div><div class="ci-label">Atendimento</div><div class="ci-val">Horários flexíveis</div></div></div>
+    </div>
+
+    <a href="https://wa.me/5511985630042" class="btn-whatsapp" target="_blank">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Conversar no WhatsApp
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="f-brand-name">Rosangela da Silva</div>
+      <div class="f-brand-sub">Terapia Científica Cristã</div>
+    </div>
+    <div class="f-cols">
+      <div class="f-col">
+        <div class="f-col-h">Serviços</div>
+        <a href="#servicos">TCE — Terapia Emocional</a>
+        <a href="#servicos">APC — Ativação Cristã</a>
+        <a href="#servicos">DPI — Personalidade</a>
+        <a href="#servicos">Gestão da Atenção</a>
+      </div>
+      <div class="f-col">
+        <div class="f-col-h">Navegação</div>
+        <a href="#sobre">Sobre mim</a>
+        <a href="#planos">Planos e Valores</a>
+        <a href="#depoimentos">Depoimentos</a>
+        <a href="#contato">Contato</a>
+      </div>
+      <div class="f-col">
+        <div class="f-col-h">Contato</div>
+        <a href="https://wa.me/5511985630042" target="_blank">WhatsApp</a>
+        <a href="#contato">Mensagem</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Rosangela da Silva. Todos os direitos reservados.</span>
+    <span>Terapia Científica Cristã · Online</span>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll
+  const nav = document.getElementById('nav');
+  const scrollBtn = document.getElementById('scrollTop');
+  window.addEventListener('scroll', () => {
+    const s = window.scrollY > 60;
+    nav.classList.toggle('scrolled', s);
+    scrollBtn.classList.toggle('show', s);
+  });
+
+  // Mobile nav
+  function toggleNav() {
+    document.getElementById('navLinks').classList.toggle('open');
+    document.getElementById('navToggle').classList.toggle('open');
+  }
+  function closeNav() {
+    document.getElementById('navLinks').classList.remove('open');
+    document.getElementById('navToggle').classList.remove('open');
+  }
+
+  // Scroll reveal
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.07, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal, .reveal-l, .reveal-r').forEach(el => obs.observe(el));
+
+  document.querySelectorAll('.servico-card, .plano-card').forEach((c, i) => {
+    c.style.transitionDelay = `${i * 0.07}s`;
+    c.classList.add('reveal');
+    obs.observe(c);
+  });
+</script>
+</body>
+</html>
